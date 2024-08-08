@@ -3,7 +3,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 
-const CreateUser: React.FC = () => {
+const CreateUser = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const queryClient = useQueryClient();

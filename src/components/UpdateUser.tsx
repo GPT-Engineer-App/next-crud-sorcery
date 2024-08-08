@@ -4,13 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
-interface User {
-  id: number;
-  name: string;
-  email: string;
-}
-
-const UpdateUser: React.FC = () => {
+const UpdateUser = () => {
   const [selectedUserId, setSelectedUserId] = useState<number | null>(null);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');

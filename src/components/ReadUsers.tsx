@@ -2,13 +2,7 @@ import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 
-interface User {
-  id: number;
-  name: string;
-  email: string;
-}
-
-const ReadUsers: React.FC = () => {
+const ReadUsers = () => {
   const { data: users, isLoading, isError } = useQuery<User[]>({
     queryKey: ['users'],
     queryFn: async () => {

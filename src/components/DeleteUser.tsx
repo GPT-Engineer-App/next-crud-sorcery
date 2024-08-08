@@ -3,13 +3,7 @@ import { useMutation, useQueryClient, useQuery } from '@tanstack/react-query';
 import { Button } from "@/components/ui/button"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
-interface User {
-  id: number;
-  name: string;
-  email: string;
-}
-
-const DeleteUser: React.FC = () => {
+const DeleteUser = () => {
   const [selectedUserId, setSelectedUserId] = useState<number | null>(null);
   const queryClient = useQueryClient();
 
