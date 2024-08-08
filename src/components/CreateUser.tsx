@@ -3,6 +3,8 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { toast } from "sonner"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { Label } from "@/components/ui/label"
 
 const CreateUser = () => {
   const [name, setName] = useState('');
@@ -36,32 +38,51 @@ const CreateUser = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!name.trim() || !email.trim()) {
+      toast.error("Name and email are required");
+      return;
+    }
     createUserMutation.mutate({ name, email });
   };
 
   return (
-    <div className="bg-white p-4 rounded shadow">
-      <h2 className="text-xl font-semibold mb-4">Create User</h2>
-      <form onSubmit={handleSubmit}>
-        <Input
-          type="text"
-          placeholder="Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          className="mb-2"
-        />
-        <Input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="mb-2"
-        />
-        <Button type="submit" disabled={createUserMutation.isPending}>
+    <Card>
+      <CardHeader>
+        <CardTitle>Create User</CardTitle>
+        <CardDescription>Add a new user to the system</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <form onSubmit={handleSubmit}>
+          <div className="grid w-full items-center gap-4">
+            <div className="flex flex-col space-y-1.5">
+              <Label htmlFor="name">Name</Label>
+              <Input
+                id="name"
+                type="text"
+                placeholder="John Doe"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </div>
+            <div className="flex flex-col space-y-1.5">
+              <Label htmlFor="email">Email</Label>
+              <Input
+                id="email"
+                type="email"
+                placeholder="john@example.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+          </div>
+        </form>
+      </CardContent>
+      <CardFooter>
+        <Button onClick={handleSubmit} disabled={createUserMutation.isPending}>
           {createUserMutation.isPending ? 'Creating...' : 'Create User'}
         </Button>
-      </form>
-    </div>
+      </CardFooter>
+    </Card>
   );
 };
 
