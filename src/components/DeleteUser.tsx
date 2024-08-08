@@ -2,6 +2,13 @@ import React, { useState } from 'react';
 import { useMutation, useQueryClient, useQuery } from '@tanstack/react-query';
 import { Button } from "@/components/ui/button"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { toast } from "sonner"
+
+interface User {
+  id: number;
+  name: string;
+  email: string;
+}
 
 const DeleteUser = () => {
   const [selectedUserId, setSelectedUserId] = useState<number | null>(null);
@@ -20,13 +27,20 @@ const DeleteUser = () => {
 
   const deleteUserMutation = useMutation({
     mutationFn: async (id: number) => {
-      await fetch(`/api/users/${id}`, {
+      const response = await fetch(`/api/users/${id}`, {
         method: 'DELETE',
       });
+      if (!response.ok) {
+        throw new Error('Failed to delete user');
+      }
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['users'] });
       setSelectedUserId(null);
+      toast.success("User deleted successfully");
+    },
+    onError: (error) => {
+      toast.error(`Error deleting user: ${error instanceof Error ? error.message : 'Unknown error'}`);
     },
   });
 
@@ -53,7 +67,13 @@ const DeleteUser = () => {
           ))}
         </SelectContent>
       </Select>
-      <Button onClick={handleDelete} disabled={!selectedUserId} variant="destructive">Delete User</Button>
+      <Button 
+        onClick={handleDelete} 
+        disabled={!selectedUserId || deleteUserMutation.isPending} 
+        variant="destructive"
+      >
+        {deleteUserMutation.isPending ? 'Deleting...' : 'Delete User'}
+      </Button>
     </div>
   );
 };

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { toast } from "sonner"
 
 const CreateUser = () => {
   const [name, setName] = useState('');
@@ -17,12 +18,19 @@ const CreateUser = () => {
         },
         body: JSON.stringify(newUser),
       });
+      if (!response.ok) {
+        throw new Error('Failed to create user');
+      }
       return response.json();
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['users'] });
       setName('');
       setEmail('');
+      toast.success("User created successfully");
+    },
+    onError: (error) => {
+      toast.error(`Error creating user: ${error instanceof Error ? error.message : 'Unknown error'}`);
     },
   });
 
@@ -49,7 +57,9 @@ const CreateUser = () => {
           onChange={(e) => setEmail(e.target.value)}
           className="mb-2"
         />
-        <Button type="submit">Create User</Button>
+        <Button type="submit" disabled={createUserMutation.isPending}>
+          {createUserMutation.isPending ? 'Creating...' : 'Create User'}
+        </Button>
       </form>
     </div>
   );

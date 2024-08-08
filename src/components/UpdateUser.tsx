@@ -3,6 +3,13 @@ import { useMutation, useQueryClient, useQuery } from '@tanstack/react-query';
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { toast } from "sonner"
+
+interface User {
+  id: number;
+  name: string;
+  email: string;
+}
 
 const UpdateUser = () => {
   const [selectedUserId, setSelectedUserId] = useState<number | null>(null);
@@ -30,6 +37,9 @@ const UpdateUser = () => {
         },
         body: JSON.stringify(updatedUser),
       });
+      if (!response.ok) {
+        throw new Error('Failed to update user');
+      }
       return response.json();
     },
     onSuccess: () => {
@@ -37,6 +47,10 @@ const UpdateUser = () => {
       setSelectedUserId(null);
       setName('');
       setEmail('');
+      toast.success("User updated successfully");
+    },
+    onError: (error) => {
+      toast.error(`Error updating user: ${error instanceof Error ? error.message : 'Unknown error'}`);
     },
   });
 
@@ -84,7 +98,9 @@ const UpdateUser = () => {
           onChange={(e) => setEmail(e.target.value)}
           className="mb-2"
         />
-        <Button type="submit" disabled={!selectedUserId}>Update User</Button>
+        <Button type="submit" disabled={!selectedUserId || updateUserMutation.isPending}>
+          {updateUserMutation.isPending ? 'Updating...' : 'Update User'}
+        </Button>
       </form>
     </div>
   );
