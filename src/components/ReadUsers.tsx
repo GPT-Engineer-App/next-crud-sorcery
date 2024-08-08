@@ -2,7 +2,7 @@ import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { ReloadIcon } from "lucide-react"
+import { Loader2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 interface User {
@@ -23,7 +23,7 @@ const ReadUsers: React.FC = () => {
     },
   });
 
-  if (isLoading) return <div className="flex justify-center items-center h-40"><ReloadIcon className="mr-2 h-4 w-4 animate-spin" /> Loading...</div>;
+  if (isLoading) return <div className="flex justify-center items-center h-40"><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Loading...</div>;
   
   if (isError) return (
     <Alert variant="destructive">
