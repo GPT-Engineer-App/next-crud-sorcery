@@ -52,6 +52,8 @@ const ReadUsers = () => {
         </TableBody>
       </Table>
     </div>
+  ) : (
+    <p>No users found.</p>
   );
 };
 
