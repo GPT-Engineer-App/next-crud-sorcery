@@ -1,7 +1,5 @@
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '@/lib/prisma';
 import type { NextApiRequest, NextApiResponse } from 'next';
-
-const prisma = new PrismaClient();
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'GET') {
@@ -9,7 +7,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       const users = await prisma.user.findMany();
       res.status(200).json(users);
     } catch (error) {
-      res.status(500).json({ error: 'Error fetching users' });
+      console.error('Error fetching users:', error);
+      res.status(500).json({ error: 'An error occurred while fetching users' });
     }
   } else if (req.method === 'POST') {
     try {
@@ -19,7 +18,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       });
       res.status(201).json(user);
     } catch (error) {
-      res.status(500).json({ error: 'Error creating user' });
+      console.error('Error creating user:', error);
+      res.status(500).json({ error: 'An error occurred while creating the user' });
     }
   } else {
     res.setHeader('Allow', ['GET', 'POST']);
