@@ -51,10 +51,10 @@ const ReadUsers = () => {
           ))}
         </TableBody>
       </Table>
-    </div>
-  ) : (
-    <p>No users found.</p>
-  );
-};
+    ) : (
+      <p>No users found.</p>
+    )}
+  </div>
+);
 
 export default ReadUsers;
