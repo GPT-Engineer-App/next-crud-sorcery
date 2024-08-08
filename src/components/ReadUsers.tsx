@@ -62,9 +62,6 @@ const ReadUsers: React.FC = () => {
     )}
   </div>
 );
-
-const ReadUsers = () => {
-  // ... (rest of the component code)
 };
 
 export default ReadUsers;
