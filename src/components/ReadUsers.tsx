@@ -5,7 +5,13 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { ReloadIcon } from "@radix-ui/react-icons"
 import { Button } from "@/components/ui/button"
 
-const ReadUsers = () => {
+interface User {
+  id: number;
+  name: string;
+  email: string;
+}
+
+const ReadUsers: React.FC = () => {
   const { data: users, isLoading, isError, error, refetch } = useQuery<User[]>({
     queryKey: ['users'],
     queryFn: async () => {
@@ -56,5 +62,9 @@ const ReadUsers = () => {
     )}
   </div>
 );
+
+const ReadUsers = () => {
+  // ... (rest of the component code)
+};
 
 export default ReadUsers;
