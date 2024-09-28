@@ -13,6 +13,9 @@ module.exports = {
       borderColor: {
         DEFAULT: 'hsl(var(--border))',
       },
+      textColor: {
+        foreground: 'hsl(var(--foreground))',
+      },
     },
   },
   plugins: [],
