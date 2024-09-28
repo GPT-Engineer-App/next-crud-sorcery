@@ -7,6 +7,9 @@ module.exports = {
   important: '#__next',
   theme: {
     extend: {
+      backgroundColor: {
+        background: 'hsl(var(--background))',
+      },
       borderColor: {
         DEFAULT: 'hsl(var(--border))',
       },
