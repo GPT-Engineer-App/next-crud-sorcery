@@ -6,7 +6,11 @@ module.exports = {
   ],
   important: '#__next',
   theme: {
-    extend: {},
+    extend: {
+      borderColor: {
+        DEFAULT: 'hsl(var(--border))',
+      },
+    },
   },
   plugins: [],
   corePlugins: {
