@@ -11,7 +11,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
     "@hookform/resolvers": "^3.6.0",
+    "@mui/icons-material": "^6.1.1",
+    "@mui/material": "^6.1.1",
     "@prisma/client": "^5.18.0",
     "@radix-ui/react-accordion": "^1.2.0",
     "@radix-ui/react-alert-dialog": "^1.1.0",
@@ -50,6 +54,7 @@
     "html-to-image": "^1.11.11",
     "input-otp": "^1.2.4",
     "lucide-react": "^0.417.0",
+    "next-intl": "^3.20.0",
     "next-themes": "^0.3.0",
     "prisma": "^5.18.0",
     "react": "^18.2.0",

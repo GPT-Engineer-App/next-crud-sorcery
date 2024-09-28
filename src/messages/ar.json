@@ -1,0 +1,12 @@
+{
+  "Navigation": {
+    "Home": "الرئيسية",
+    "About": "عن",
+    "Portfolio": "معرض الأعمال",
+    "ContactUs": "اتصل بنا",
+    "ChangeLanguage": "English"
+  },
+  "Home": {
+    "greeting": "مرحبا بالعالم"
+  }
+}

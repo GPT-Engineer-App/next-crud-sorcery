@@ -1,0 +1,12 @@
+{
+  "Navigation": {
+    "Home": "Home",
+    "About": "About",
+    "Portfolio": "Portfolio",
+    "ContactUs": "Contact Us",
+    "ChangeLanguage": "العربية"
+  },
+  "Home": {
+    "greeting": "Hello World"
+  }
+}
