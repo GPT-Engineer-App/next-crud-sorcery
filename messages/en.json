@@ -1,0 +1,11 @@
+{
+  "Index": {
+    "title": "Welcome to my app",
+    "description": "This is a sample application with localization support."
+  },
+  "Navigation": {
+    "home": "Home",
+    "about": "About",
+    "languageSwitcher": "Switch language"
+  }
+}
